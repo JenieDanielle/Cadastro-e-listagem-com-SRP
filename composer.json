@@ -1,0 +1,12 @@
+{
+    "name": "jdft1/solid-spd-demo1",
+    "description": "Cadastro e listagem SRP",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}
