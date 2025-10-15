@@ -2,9 +2,12 @@
 
 // <!-- unico que lê e escreve no arquivo -->
 
+declare(strict_types=1);
+
 namespace App\Infra;
 
-use App\Domain\ProductRepository;
+use App\Contracts\ProductRepository;
+
 
 final class FileProductRepository implements ProductRepository
 {
@@ -45,6 +48,15 @@ final class FileProductRepository implements ProductRepository
         }
 
         $lines = file($this->filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        return array_map(fn($line) => json_decode($line, true), $lines);
+        $products = [];
+
+        foreach ($lines as $line) {
+            $data = json_decode($line, true);
+            if (is_array($data)) {
+                $products[] = $data;
+            }
+        }
+
+        return $products;
     }
 }

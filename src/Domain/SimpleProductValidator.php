@@ -3,7 +3,7 @@
 
  namespace App\Domain;
 
- use App\Domain\ProductValidator;
+ use App\Contracts\ProductValidator;
 
  final class SimpleProductValidator implements ProductValidator
  {
@@ -12,7 +12,7 @@
         $errors = [];
 
         $name = $input['name'] ?? '';
-        $price = $float['price'] ?? '';
+        $price = $input['price'] ?? '';
 
         if (strlen($name) < 2){
             $errors[] = 'Precisa ter um nome com mais de 2 caracteres';
@@ -20,7 +20,7 @@
             $errors[] = 'O nome pode ter até 100 caracteres';
         }
 
-        if ($price < 0){
+        if (!is_numeric($price) || $price < 0){
             $errors[] = 'Insira um valor maior ou igual a 0';
         }
 

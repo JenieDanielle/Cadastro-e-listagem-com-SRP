@@ -1,0 +1,1 @@
+{"id":1,"name":"Pote de sorvete","price":10}
